@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyiron &#8212; Python Workflow Definition</title>
+    <title>Overwrite source directory with absolute path &#8212; Python Workflow Definition</title>
   
   
   
@@ -57,11 +57,9 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/arithmetic/pyiron_base';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/nfdi/cwl';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Energy Volume Curve" href="../../evcurve.html" />
-    <link rel="prev" title="jobflow" href="jobflow.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -124,6 +122,8 @@
       
       
       
+        
+      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -173,12 +173,12 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Definition</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
-<li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyiron</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arithmetic/pyiron_base.html">pyiron</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -188,9 +188,9 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../nfdi.html">NFDI4Ing Benchmark</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../nfdi/aiida.html">Aiida</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../nfdi/jobflow.html">jobflow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../nfdi/pyiron_base.html">pyiron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../conclusion.html">Conclusion</a></li>
@@ -248,7 +248,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/arithmetic/pyiron_base.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/nfdi/cwl.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -279,7 +279,7 @@
       
       
       
-      <li><a href="../../_sources/example_workflows/arithmetic/pyiron_base.ipynb" target="_blank"
+      <li><a href="../../_sources/example_workflows/nfdi/cwl.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -363,7 +363,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>pyiron</h1>
+    <h1>Overwrite source directory with absolute path</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -373,10 +373,10 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-pyiron-base">Define workflow with pyiron_base</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overwrite source directory with absolute path</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-workflow">Execute workflow</a></li>
 </ul>
+
             </nav>
         </div>
     </div>
@@ -387,197 +387,191 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pyiron">
-<h1>pyiron<a class="headerlink" href="#pyiron" title="Link to this heading">#</a></h1>
-<section id="define-workflow-with-pyiron-base">
-<h2>Define workflow with pyiron_base<a class="headerlink" href="#define-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
+  <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">job</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pickle</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_sum</span> <span class="k">as</span> <span class="n">_get_sum</span><span class="p">,</span>
-    <span class="n">get_prod_and_div</span> <span class="k">as</span> <span class="n">_get_prod_and_div</span><span class="p">,</span>
-    <span class="n">get_square</span> <span class="k">as</span> <span class="n">_get_square</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;pyiron_arithmetic.json&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.cwl</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="overwrite-source-directory-with-absolute-path">
+<h1>Overwrite source directory with absolute path<a class="headerlink" href="#overwrite-source-directory-with-absolute-path" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">content</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_sum</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_sum</span><span class="p">)</span>
-<span class="n">get_prod_and_div</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_prod_and_div</span><span class="p">,</span> <span class="n">output_key_lst</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;prod&quot;</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">])</span>
-<span class="n">get_square</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_square</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prod_and_div</span> <span class="o">=</span> <span class="n">get_prod_and_div</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_sum</span> <span class="o">=</span> <span class="n">get_sum</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">prod_and_div</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">prod</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">prod_and_div</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">div</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">get_square</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tmp_sum</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow_json</span><span class="p">(</span><span class="n">delayed_object</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span><span class="o">{</span>workflow_json_filename<span class="o">}</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&quot;nodes&quot;: [{&quot;id&quot;: 0, &quot;function&quot;: &quot;arithmetic_workflow.get_sum&quot;}, {&quot;id&quot;: 1, &quot;function&quot;: &quot;arithmetic_workflow.get_prod_and_div&quot;}, {&quot;id&quot;: 2, &quot;value&quot;: 1}, {&quot;id&quot;: 3, &quot;value&quot;: 2}], &quot;edges&quot;: [{&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;x&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;prod&quot;}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;x&quot;, &quot;source&quot;: 2, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 1, &quot;targetPort&quot;: &quot;y&quot;, &quot;source&quot;: 3, &quot;sourcePort&quot;: null}, {&quot;target&quot;: 0, &quot;targetPort&quot;: &quot;y&quot;, &quot;source&quot;: 1, &quot;sourcePort&quot;: &quot;div&quot;}]}
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="load-workflow-with-aiida">
-<h2>Load Workflow with aiida<a class="headerlink" href="#load-workflow-with-aiida" title="Link to this heading">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_profile</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">node_lst</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">content</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">n</span> <span class="ow">and</span> <span class="n">n</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;source_directory&#39;</span><span class="p">:</span>
+        <span class="n">n</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">n</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">])</span>
+    <span class="n">node_lst</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 
-<span class="n">load_profile</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;5b8a8d98b3014876a9eed7d85a954e5e&#39; name=&#39;pwd&#39;&gt;
+<span class="n">content</span><span class="p">[</span><span class="s2">&quot;nodes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_lst</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
-<span class="n">wg</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"model_id": "cb6aafce370b43bb9904c64f03c93cc0", "version_major": 2, "version_minor": 1}</script></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>04/23/2025 09:45:47 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_prod_and_div2
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|update_task_state]: Task: get_prod_and_div2, type: PyFunction, finished.
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_sum1
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|update_task_state]: Task: get_sum1, type: PyFunction, finished.
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-04/23/2025 09:45:48 AM &lt;4032&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [138|WorkGraphEngine|finalize]: Finalize workgraph.
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 </section>
-<section id="load-workflow-with-jobflow">
-<h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<section class="tex2jax_ignore mathjax_ignore" id="execute-workflow">
+<h1>Execute workflow<a class="headerlink" href="#execute-workflow" title="Link to this heading">#</a></h1>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span><span class="w"> </span>cwltool<span class="w"> </span>--preserve-environment<span class="o">=</span>CONDA_EXE<span class="w"> </span>workflow.cwl<span class="w"> </span>workflow.yml
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/pkey.py:82: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;cipher&quot;: algorithms.TripleDES,
-/srv/conda/envs/notebook/lib/python3.12/site-packages/paramiko/transport.py:253: CryptographyDeprecationWarning: TripleDES has been moved to cryptography.hazmat.decrepit.ciphers.algorithms.TripleDES and will be removed from cryptography.hazmat.primitives.ciphers.algorithms in 48.0.0.
-  &quot;class&quot;: algorithms.TripleDES,
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/srv/conda/envs/notebook/bin/cwltool:11: DeprecationWarning: Nesting argument groups is deprecated.
+  sys.exit(run())
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> /srv/conda/envs/notebook/bin/cwltool 3.1.20250110105449
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Resolved &#39;workflow.cwl&#39; to &#39;file:///home/jovyan/example_workflows/nfdi/workflow.cwl&#39;
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step generate_mesh_0
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step generate_mesh_0] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_mesh_0] /tmp/2zy1qyud$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/3kq1m6dv/stgfdd0e5fa-ab2c-4ee5-a621-421e0f130c2d/workflow.py \
+    --function=workflow.generate_mesh \
+    --arg_source_directory=/tmp/3kq1m6dv/stgb3cb8d7a-2fd4-4bed-bddd-a53347db76d4/source_directory.pickle \
+    --arg_domain_size=/tmp/3kq1m6dv/stgf88b878d-cda3-46dc-b95b-1a5866fc79df/domain_size.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_mesh_0] Max memory used: 51MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job generate_mesh_0] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step generate_mesh_0] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step convert_to_xdmf_1
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step convert_to_xdmf_1] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job convert_to_xdmf_1] /tmp/wtfrae9y$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/mnez84gw/stg3b3a2c97-dc53-4fa4-8b26-1c0ef725455a/workflow.py \
+    --function=workflow.convert_to_xdmf \
+    --arg_gmsh_output_file=/tmp/mnez84gw/stg7cb20c0e-e3a4-40c7-b347-90b3861ac948/result.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job convert_to_xdmf_1] Max memory used: 62MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job convert_to_xdmf_1] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step convert_to_xdmf_1] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step poisson_2
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step poisson_2] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job poisson_2] /tmp/c25cseik$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/mdjrrwsb/stg9fc40fe1-ad74-4530-9b90-3f25cda3228b/workflow.py \
+    --function=workflow.poisson \
+    --arg_source_directory=/tmp/mdjrrwsb/stg95c5865b-b3b7-41a3-9f91-8c0d4e64e2cc/source_directory.pickle \
+    --arg_meshio_output_xdmf=/tmp/mdjrrwsb/stg3f852952-6283-4843-8a5a-799885c3a16f/xdmf_file.pickle \
+    --arg_meshio_output_h5=/tmp/mdjrrwsb/stg4c12ec47-0d6d-4749-afb0-b44bcfdae15c/h5_file.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job poisson_2] Max memory used: 71MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job poisson_2] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step poisson_2] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step plot_over_line_3
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step plot_over_line_3] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_over_line_3] /tmp/6taq1l9y$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/fr8grips/stgcc344580-aae9-480d-915b-b011888e11a9/workflow.py \
+    --function=workflow.plot_over_line \
+    --arg_poisson_output_pvd_file=/tmp/fr8grips/stg7c2c93df-069a-4d33-8ebc-402be33d67d0/pvd_file.pickle \
+    --arg_poisson_output_vtu_file=/tmp/fr8grips/stg481f6c15-8e7c-4198-9f1b-d61aa097b829/vtu_file.pickle \
+    --arg_source_directory=/tmp/fr8grips/stge25af463-7689-43d8-b783-165f68b907bd/source_directory.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_over_line_3] Max memory used: 71MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job plot_over_line_3] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step plot_over_line_3] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step substitute_macros_4
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step substitute_macros_4] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job substitute_macros_4] /tmp/ry44k1po$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/_yac4p7u/stge908c7b1-0d4d-44a4-a2d4-62c97b75d25f/workflow.py \
+    --function=workflow.substitute_macros \
+    --arg_ndofs=/tmp/_yac4p7u/stgd19106a7-26ec-4159-87e5-c55df4e05b3e/numdofs.pickle \
+    --arg_source_directory=/tmp/_yac4p7u/stgea87bc3d-5042-4044-b2bb-58a83646f704/source_directory.pickle \
+    --arg_pvbatch_output_file=/tmp/_yac4p7u/stga426ce18-a7c0-4941-9b4c-988615fb6dd6/result.pickle \
+    --arg_domain_size=/tmp/_yac4p7u/stg75e4cce3-e411-4ffe-b1df-e5d40daa8d61/domain_size.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job substitute_macros_4] Max memory used: 92MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job substitute_macros_4] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step substitute_macros_4] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] starting step compile_paper_5
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step compile_paper_5] start
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job compile_paper_5] /tmp/u4tewx74$ python \
+    -m \
+    python_workflow_definition.cwl \
+    --workflowfile=/tmp/c_jbp86a/stge99c916c-dabe-474c-b5f1-947214d3f9ed/workflow.py \
+    --function=workflow.compile_paper \
+    --arg_source_directory=/tmp/c_jbp86a/stg09ed111f-9743-4670-a6e6-182b1b32360d/source_directory.pickle \
+    --arg_plot_file=/tmp/c_jbp86a/stg5649e17e-4a2b-416c-8107-31df66b6e769/result.pickle \
+    --arg_macros_tex=/tmp/c_jbp86a/stg26421152-a968-4c63-97a0-8ed741b07f1a/result.pickle
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job compile_paper_5] Max memory used: 260MiB
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [job compile_paper_5] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [step compile_paper_5] completed success
+<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> [workflow ] completed success
+{
+    &quot;result_file&quot;: {
+        &quot;location&quot;: &quot;file:///home/jovyan/example_workflows/nfdi/result.pickle&quot;,
+        &quot;basename&quot;: &quot;result.pickle&quot;,
+        &quot;class&quot;: &quot;File&quot;,
+        &quot;checksum&quot;: &quot;sha1$1be622d292821508f2a41ec4bc8a04d06dfbdbaf&quot;,
+        &quot;size&quot;: 53,
+        &quot;path&quot;: &quot;/home/jovyan/example_workflows/nfdi/result.pickle&quot;
+    }
+}<span class=" -Color -Color-Bold -Color-Bold-Black">INFO</span> Final process status is success
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow.managers.local</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_locally</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">run_locally</span><span class="p">(</span><span class="n">flow</span><span class="p">)</span>
-<span class="n">result</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;result.pickle&quot;</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pickle</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-04-23 09:45:49,174 INFO Started executing jobs locally
-2025-04-23 09:45:49,540 INFO Starting job - get_prod_and_div (77d76447-21f8-4ad8-b2b5-bef7263ef5b9)
-2025-04-23 09:45:49,543 INFO Finished job - get_prod_and_div (77d76447-21f8-4ad8-b2b5-bef7263ef5b9)
-2025-04-23 09:45:49,544 INFO Starting job - get_sum (e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0)
-2025-04-23 09:45:49,546 INFO Finished job - get_sum (e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0)
-2025-04-23 09:45:49,546 INFO Finished executing jobs locally
-</pre></div>
-</div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;77d76447-21f8-4ad8-b2b5-bef7263ef5b9&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))},
- &#39;e61e0bc0-bddd-4ac9-93f0-cf5f064e17b0&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan&#39;))}}
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/u4tewx74/postprocessing/paper.pdf
 </pre></div>
 </div>
 </div>
 </div>
-</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -593,7 +587,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./example_workflows/arithmetic"
+            path: "./example_workflows/nfdi"
         },
         predefinedOutput: true
     }
@@ -610,24 +604,6 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="jobflow.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">jobflow</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../../evcurve.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Energy Volume Curve</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -644,10 +620,10 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-pyiron-base">Define workflow with pyiron_base</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Overwrite source directory with absolute path</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-workflow">Execute workflow</a></li>
 </ul>
+
   </nav></div>
 
 </div></div>
