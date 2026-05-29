@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pyiron &#8212; Python Workflow Definition</title>
+    <title>executorlib &#8212; Python Workflow Definition</title>
   
   
   
@@ -60,11 +60,9 @@
     <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/arithmetic/pyiron_base';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example_workflows/arithmetic/executorlib';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Energy Volume Curve" href="../../evcurve.html" />
-    <link rel="prev" title="jobflow" href="jobflow.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -116,6 +114,8 @@
       
       
       
+        
+      
       <dialog id="pst-primary-sidebar-modal"></dialog>
       <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
@@ -162,12 +162,12 @@
                 </a>
             </li>
         </ul>
-        <ul class="current nav bd-sidenav">
+        <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../intro.html">Definition</a></li>
-<li class="toctree-l1 current active has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../arithmetic.html">Arithmetic Workflow</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="aiida.html">Aiida</a></li>
 <li class="toctree-l2"><a class="reference internal" href="jobflow.html">jobflow</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">pyiron</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pyiron_base.html">pyiron</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
@@ -242,7 +242,7 @@
       
       
       
-      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/arithmetic/pyiron_base.ipynb" target="_blank"
+      <li><a href="https://mybinder.org/v2/gh/pythonworkflow/python-workflow-definition/master?urlpath=lab/tree/example_workflows/arithmetic/executorlib.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch on Binder"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -273,7 +273,7 @@
       
       
       
-      <li><a href="../../_sources/example_workflows/arithmetic/pyiron_base.ipynb" target="_blank"
+      <li><a href="../../_sources/example_workflows/arithmetic/executorlib.ipynb" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -349,7 +349,7 @@
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>pyiron</h1>
+    <h1>executorlib</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -359,9 +359,10 @@
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-pyiron-base">Define workflow with pyiron_base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-executorlib">Define workflow with executorlib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
 </ul>
             </nav>
@@ -374,75 +375,39 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="pyiron">
-<h1>pyiron<a class="headerlink" href="#pyiron" title="Link to this heading">#</a></h1>
-<section id="define-workflow-with-pyiron-base">
-<h2>Define workflow with pyiron_base<a class="headerlink" href="#define-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="executorlib">
+<h1>executorlib<a class="headerlink" href="#executorlib" title="Link to this heading">#</a></h1>
+<section id="define-workflow-with-executorlib">
+<h2>Define workflow with executorlib<a class="headerlink" href="#define-workflow-with-executorlib" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">job</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">executorlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleNodeExecutor</span><span class="p">,</span> <span class="n">get_item_from_future</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">write_workflow_json</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_sum</span><span class="p">,</span> <span class="n">get_prod_and_div</span><span class="p">,</span> <span class="n">get_square</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">workflow</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
-    <span class="n">get_sum</span> <span class="k">as</span> <span class="n">_get_sum</span><span class="p">,</span>
-    <span class="n">get_prod_and_div</span> <span class="k">as</span> <span class="n">_get_prod_and_div</span><span class="p">,</span>
-    <span class="n">get_square</span> <span class="k">as</span> <span class="n">_get_square</span><span class="p">,</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;executorlib_arithmetic.json&quot;</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;pyiron_arithmetic.json&quot;</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">get_sum</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_sum</span><span class="p">)</span>
-<span class="n">get_prod_and_div</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_prod_and_div</span><span class="p">,</span> <span class="n">output_key_lst</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;prod&quot;</span><span class="p">,</span> <span class="s2">&quot;div&quot;</span><span class="p">])</span>
-<span class="n">get_square</span> <span class="o">=</span> <span class="n">job</span><span class="p">(</span><span class="n">_get_square</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">prod_and_div</span> <span class="o">=</span> <span class="n">get_prod_and_div</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_sum</span> <span class="o">=</span> <span class="n">get_sum</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">prod_and_div</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">prod</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">prod_and_div</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">div</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">get_square</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">tmp_sum</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">write_workflow_json</span><span class="p">(</span><span class="n">delayed_object</span><span class="o">=</span><span class="n">result</span><span class="p">,</span> <span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">SingleNodeExecutor</span><span class="p">(</span><span class="n">export_workflow_filename</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span> <span class="k">as</span> <span class="n">exe</span><span class="p">:</span>
+    <span class="n">future_prod_and_div</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">get_prod_and_div</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">future_prod</span> <span class="o">=</span> <span class="n">get_item_from_future</span><span class="p">(</span><span class="n">future_prod_and_div</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;prod&quot;</span><span class="p">)</span>
+    <span class="n">future_div</span> <span class="o">=</span> <span class="n">get_item_from_future</span><span class="p">(</span><span class="n">future_prod_and_div</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="s2">&quot;div&quot;</span><span class="p">)</span>
+    <span class="n">future_sum</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">get_sum</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">future_prod</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">future_div</span><span class="p">)</span>
+    <span class="n">future_result</span> <span class="o">=</span> <span class="n">exe</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="n">get_square</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">future_sum</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -455,79 +420,79 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-  &quot;version&quot;: &quot;0.1.0&quot;,
-  &quot;nodes&quot;: [
-    {
-      &quot;id&quot;: 0,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.get_square&quot;
-    },
-    {
-      &quot;id&quot;: 1,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.get_sum&quot;
-    },
-    {
-      &quot;id&quot;: 2,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.get_prod_and_div&quot;
-    },
-    {
-      &quot;id&quot;: 3,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;x&quot;,
-      &quot;value&quot;: 1
-    },
-    {
-      &quot;id&quot;: 4,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;y&quot;,
-      &quot;value&quot;: 2
-    },
-    {
-      &quot;id&quot;: 5,
-      &quot;type&quot;: &quot;output&quot;,
-      &quot;name&quot;: &quot;result&quot;
-    }
-  ],
-  &quot;edges&quot;: [
-    {
-      &quot;target&quot;: 0,
-      &quot;targetPort&quot;: &quot;x&quot;,
-      &quot;source&quot;: 1,
-      &quot;sourcePort&quot;: null
-    },
-    {
-      &quot;target&quot;: 1,
-      &quot;targetPort&quot;: &quot;x&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;prod&quot;
-    },
-    {
-      &quot;target&quot;: 2,
-      &quot;targetPort&quot;: &quot;x&quot;,
-      &quot;source&quot;: 3,
-      &quot;sourcePort&quot;: null
-    },
-    {
-      &quot;target&quot;: 2,
-      &quot;targetPort&quot;: &quot;y&quot;,
-      &quot;source&quot;: 4,
-      &quot;sourcePort&quot;: null
-    },
-    {
-      &quot;target&quot;: 1,
-      &quot;targetPort&quot;: &quot;y&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;div&quot;
-    },
-    {
-      &quot;target&quot;: 5,
-      &quot;targetPort&quot;: null,
-      &quot;source&quot;: 0,
-      &quot;sourcePort&quot;: null
-    }
-  ]
+    &quot;version&quot;: &quot;0.1.0&quot;,
+    &quot;nodes&quot;: [
+        {
+            &quot;id&quot;: 0,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.get_prod_and_div&quot;
+        },
+        {
+            &quot;id&quot;: 1,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.get_sum&quot;
+        },
+        {
+            &quot;id&quot;: 2,
+            &quot;type&quot;: &quot;function&quot;,
+            &quot;value&quot;: &quot;workflow.get_square&quot;
+        },
+        {
+            &quot;id&quot;: 3,
+            &quot;type&quot;: &quot;input&quot;,
+            &quot;value&quot;: 1,
+            &quot;name&quot;: &quot;x&quot;
+        },
+        {
+            &quot;id&quot;: 4,
+            &quot;type&quot;: &quot;input&quot;,
+            &quot;value&quot;: 2,
+            &quot;name&quot;: &quot;y&quot;
+        },
+        {
+            &quot;id&quot;: 5,
+            &quot;type&quot;: &quot;output&quot;,
+            &quot;name&quot;: &quot;result&quot;
+        }
+    ],
+    &quot;edges&quot;: [
+        {
+            &quot;target&quot;: 0,
+            &quot;targetPort&quot;: &quot;x&quot;,
+            &quot;source&quot;: 3,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 0,
+            &quot;targetPort&quot;: &quot;y&quot;,
+            &quot;source&quot;: 4,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 1,
+            &quot;targetPort&quot;: &quot;x&quot;,
+            &quot;source&quot;: 0,
+            &quot;sourcePort&quot;: &quot;prod&quot;
+        },
+        {
+            &quot;target&quot;: 1,
+            &quot;targetPort&quot;: &quot;y&quot;,
+            &quot;source&quot;: 0,
+            &quot;sourcePort&quot;: &quot;div&quot;
+        },
+        {
+            &quot;target&quot;: 2,
+            &quot;targetPort&quot;: &quot;x&quot;,
+            &quot;source&quot;: 1,
+            &quot;sourcePort&quot;: null
+        },
+        {
+            &quot;target&quot;: 5,
+            &quot;targetPort&quot;: null,
+            &quot;source&quot;: 2,
+            &quot;sourcePort&quot;: null
+        }
+    ]
 }
 </pre></div>
 </div>
@@ -545,7 +510,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;3ce302a995914d2e8a7b6327a10fe381&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;c08748df7ab74ec08c14e5f16cebc987&#39; name=&#39;pwd&#39;&gt;
 </pre></div>
 </div>
 </div>
@@ -565,7 +530,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "f52e57854d6e4d07b6a2c11a75873efe"}</script></div>
+<script type="application/vnd.jupyter.widget-view+json">{"model_id": "d1e4dac30bd3409f8000d40062e2ae1b", "version_major": 2, "version_minor": 1}</script></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -574,14 +539,17 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_prod_and_div3
-05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|update_task_state]: Task: get_prod_and_div3, type: PyFunction, finished.
-05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_sum2
-05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|update_task_state]: Task: get_sum2, type: PyFunction, finished.
-05/24/2025 05:39:21 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_square1
-05/24/2025 05:39:22 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|update_task_state]: Task: get_square1, type: PyFunction, finished.
-05/24/2025 05:39:22 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
-05/24/2025 05:39:22 AM &lt;524&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [19|WorkGraphEngine|finalize]: Finalize workgraph.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>01/16/2026 08:08:17 AM &lt;39822&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1573|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_prod_and_div
+01/16/2026 08:08:17 AM &lt;39822&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1573|WorkGraphEngine|update_task_state]: Task: get_prod_and_div, type: PYFUNCTION, finished.
+01/16/2026 08:08:17 AM &lt;39822&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1573|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_sum
+01/16/2026 08:08:18 AM &lt;39822&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1573|WorkGraphEngine|update_task_state]: Task: get_sum, type: PYFUNCTION, finished.
+01/16/2026 08:08:18 AM &lt;39822&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1573|WorkGraphEngine|continue_workgraph]: tasks ready to run: get_square
+01/16/2026 08:08:18 AM &lt;39822&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1573|WorkGraphEngine|update_task_state]: Task: get_square, type: PYFUNCTION, finished.
+01/16/2026 08:08:18 AM &lt;39822&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1573|WorkGraphEngine|continue_workgraph]: tasks ready to run: 
+01/16/2026 08:08:18 AM &lt;39822&gt; aiida.orm.nodes.process.workflow.workchain.WorkChainNode: [REPORT] [1573|WorkGraphEngine|finalize]: Finalize workgraph.
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{}
 </pre></div>
 </div>
 </div>
@@ -618,19 +586,57 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2025-05-24 05:39:22,893 INFO Started executing jobs locally
-2025-05-24 05:39:23,184 INFO Starting job - get_prod_and_div (82cb13d7-d7c8-4bd1-84d1-c301d4ee2422)
-2025-05-24 05:39:23,187 INFO Finished job - get_prod_and_div (82cb13d7-d7c8-4bd1-84d1-c301d4ee2422)
-2025-05-24 05:39:23,187 INFO Starting job - get_sum (19c0830c-e918-44d2-82f1-b9418463c057)
-2025-05-24 05:39:23,189 INFO Finished job - get_sum (19c0830c-e918-44d2-82f1-b9418463c057)
-2025-05-24 05:39:23,189 INFO Starting job - get_square (78fc4e6e-2a99-490e-b829-fae9704296c2)
-2025-05-24 05:39:23,190 INFO Finished job - get_square (78fc4e6e-2a99-490e-b829-fae9704296c2)
-2025-05-24 05:39:23,191 INFO Finished executing jobs locally
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2026-01-16 08:08:27,788 INFO Started executing jobs locally
+2026-01-16 08:08:28,329 INFO Starting job - get_prod_and_div (548e497c-81af-44a2-a626-cd9466984398)
+2026-01-16 08:08:28,332 INFO Finished job - get_prod_and_div (548e497c-81af-44a2-a626-cd9466984398)
+2026-01-16 08:08:28,333 INFO Starting job - get_sum (c4ce346f-059c-4cb1-8e98-c7f4f0df837e)
+2026-01-16 08:08:28,335 INFO Finished job - get_sum (c4ce346f-059c-4cb1-8e98-c7f4f0df837e)
+2026-01-16 08:08:28,336 INFO Starting job - get_square (e94efcd4-8074-48b1-865c-0e614fc9c846)
+2026-01-16 08:08:28,339 INFO Finished job - get_square (e94efcd4-8074-48b1-865c-0e614fc9c846)
+2026-01-16 08:08:28,340 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;82cb13d7-d7c8-4bd1-84d1-c301d4ee2422&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))},
- &#39;19c0830c-e918-44d2-82f1-b9418463c057&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))},
- &#39;78fc4e6e-2a99-490e-b829-fae9704296c2&#39;: {1: Response(output=6.25, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;548e497c-81af-44a2-a626-cd9466984398&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic&#39;))},
+ &#39;c4ce346f-059c-4cb1-8e98-c7f4f0df837e&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic&#39;))},
+ &#39;e94efcd4-8074-48b1-865c-0e614fc9c846&#39;: {1: Response(output=6.25, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jan/notebooks/2026/2026-01-16-executorlib-pwd/arithmetic&#39;))}}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="load-workflow-with-pyiron-base">
+<h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="n">workflow_json_filename</span><span class="p">)</span>
+<span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/d306f99428509411d5f4e14a6cf22abfcc79ab4f34b9001705e5807564c4042d.svg" src="../../_images/d306f99428509411d5f4e14a6cf22abfcc79ab4f34b9001705e5807564c4042d.svg" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">pull</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The job get_prod_and_div_00cf2c787390eacfbc4a51e9a0c38ec7 was saved and received the ID: 31
+The job get_sum_4b5b9d16b259a13b6a32798ce2779af8 was saved and received the ID: 32
+The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the ID: 33
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6.25
 </pre></div>
 </div>
 </div>
@@ -658,10 +664,18 @@
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../../_images/894abd3dcc78887d897af1c177f72bea902fcbfcd269e09cd64eac4a5eb6ed66.svg" src="../../_images/894abd3dcc78887d897af1c177f72bea902fcbfcd269e09cd64eac4a5eb6ed66.svg" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;get_square__get_square&#39;: 6.25}
 </pre></div>
 </div>
 </div>
@@ -699,24 +713,6 @@
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
-    <a class="left-prev"
-       href="jobflow.html"
-       title="previous page">
-      <i class="fa-solid fa-angle-left"></i>
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">jobflow</p>
-      </div>
-    </a>
-    <a class="right-next"
-       href="../../evcurve.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Energy Volume Curve</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
-    </a>
 </div>
                 </footer>
               
@@ -735,9 +731,10 @@
   </div>
   <nav id="pst-page-toc-nav" class="page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-pyiron-base">Define workflow with pyiron_base</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-workflow-with-executorlib">Define workflow with executorlib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-aiida">Load Workflow with aiida</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-jobflow">Load Workflow with jobflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-base">Load Workflow with pyiron_base</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
 </ul>
   </nav></div>
