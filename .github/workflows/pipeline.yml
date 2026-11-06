@@ -176,6 +176,7 @@ jobs:
         path: example_workflows/arithmetic/*_out.ipynb
 
   documentation:
+    needs: [nfdi4ing, quantumespresso, arithmetic]
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v6
@@ -196,9 +197,36 @@ jobs:
         cp documentation/_toc.yml .
         cp documentation/*.md .
         cp documentation/*.png .
+    - name: Collect executed notebooks
+      uses: actions/download-artifact@v4
+      with:
+        name: executed-notebooks-arithmetic
+        path: example_workflows/arithmetic/
+    - name: Collect executed nfdi notebooks
+      uses: actions/download-artifact@v4
+      with:
+        name: executed-notebooks-nfdi
+        path: example_workflows/nfdi/
+    - name: Collect executed qe notebooks
+      uses: actions/download-artifact@v4
+      with:
+        name: executed-notebooks-quantum_espresso
+        path: example_workflows/quantum_espresso/
+    - name: Build book with outputs
+      shell: bash -l {0}
+      run: |
+        for f in example_workflows/*/*_out.ipynb; do mv "$f" "${f%_out.ipynb}.ipynb"; done
         jupyter-book build . --path-output public
         mv public/_build/html public_html
         touch public_html/.nojekyll
+    - name: Deploy
+      if: github.ref == 'refs/heads/main'
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages
+        FOLDER: public_html
+        CLEAN: true
 
   unittest_matrix:
     runs-on: ${{ matrix.operating-system }}
