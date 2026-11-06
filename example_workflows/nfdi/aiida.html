@@ -141,8 +141,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Python Workflow Definition - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Python Workflow Definition - Home"/>
   
-    <p class="title logo__title">Python Workflow Definition</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -171,7 +177,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -377,8 +383,10 @@
   <section class="tex2jax_ignore mathjax_ignore" id="aiida">
 <h1>Aiida<a class="headerlink" href="#aiida" title="Link to this heading">#</a></h1>
 <p><a class="github reference external" href="https://github.com/BAMresearch/NFDI4IngScientificWorkflowRequirements">BAMresearch/NFDI4IngScientificWorkflowRequirements</a></p>
+<p>This notebook defines the NFDI4Ing file-based workflow benchmark with <a class="reference external" href="https://github.com/aiidateam/aiida-workgraph"><code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code></a> and then loads the resulting <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> into <code class="docutils literal notranslate"><span class="pre">jobflow</span></code>, <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code> and <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> to show that the same JSON file can be executed by different engines. Every stage of the workflow calls an external command-line tool (<code class="docutils literal notranslate"><span class="pre">gmsh</span></code>, <code class="docutils literal notranslate"><span class="pre">meshio</span></code>, a FEniCS-based Poisson solver, ParaView’s <code class="docutils literal notranslate"><span class="pre">pvbatch</span></code>, <code class="docutils literal notranslate"><span class="pre">tectonic</span></code>) in its own conda environment and passes file paths between stages rather than in-memory Python objects — see <a class="reference download internal" download="" href="../../_downloads/7849111caddeecc1f84b6e10d30bdd5e/workflow.py"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">workflow.py</span></code></span></a> for the six pipeline functions.</p>
 <section id="define-workflow-with-aiida">
 <h2>Define workflow with aiida<a class="headerlink" href="#define-workflow-with-aiida" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> represents a workflow as a <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code> of <code class="docutils literal notranslate"><span class="pre">Task</span></code>s. <code class="docutils literal notranslate"><span class="pre">load_profile()</span></code> connects to the local AiiDA profile/database that stores provenance and results for every task. <code class="docutils literal notranslate"><span class="pre">generate_mesh</span></code>, <code class="docutils literal notranslate"><span class="pre">plot_over_line</span></code>, <code class="docutils literal notranslate"><span class="pre">substitute_macros</span></code> and <code class="docutils literal notranslate"><span class="pre">compile_paper</span></code> each return a single value and can be added to the graph unchanged, but <code class="docutils literal notranslate"><span class="pre">convert_to_xdmf</span></code> and <code class="docutils literal notranslate"><span class="pre">poisson</span></code> return a <code class="docutils literal notranslate"><span class="pre">dict</span></code>, so they are wrapped with <code class="docutils literal notranslate"><span class="pre">task(outputs=[...])</span></code> to expose each dictionary key as its own output socket that later tasks can connect to.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
@@ -397,7 +405,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;3ce302a995914d2e8a7b6327a10fe381&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid='3ce302a995914d2e8a7b6327a10fe381' name='pwd'&gt;
 </pre></div>
 </div>
 </div>
@@ -418,15 +426,16 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">convert_to_xdmf</span> <span class="o">=</span> <span class="n">task</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;xdmf_file&quot;</span><span class="p">,</span> <span class="s2">&quot;h5_file&quot;</span><span class="p">])(</span><span class="n">_convert_to_xdmf</span><span class="p">)</span>
-<span class="n">poisson</span> <span class="o">=</span> <span class="n">task</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;numdofs&quot;</span><span class="p">,</span> <span class="s2">&quot;pvd_file&quot;</span><span class="p">,</span> <span class="s2">&quot;vtu_file&quot;</span><span class="p">])(</span><span class="n">_poisson</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">convert_to_xdmf</span> <span class="o">=</span> <span class="n">task</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"xdmf_file"</span><span class="p">,</span> <span class="s2">"h5_file"</span><span class="p">])(</span><span class="n">_convert_to_xdmf</span><span class="p">)</span>
+<span class="n">poisson</span> <span class="o">=</span> <span class="n">task</span><span class="p">(</span><span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="s2">"numdofs"</span><span class="p">,</span> <span class="s2">"pvd_file"</span><span class="p">,</span> <span class="s2">"vtu_file"</span><span class="p">])(</span><span class="n">_poisson</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>AiiDA tracks every input as a typed, storable node, so the shared <code class="docutils literal notranslate"><span class="pre">domain_size</span></code> and <code class="docutils literal notranslate"><span class="pre">source_directory</span></code> values are wrapped as <code class="docutils literal notranslate"><span class="pre">orm.Float</span></code> and <code class="docutils literal notranslate"><span class="pre">orm.Str</span></code> before being connected to any task.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">orm</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">&quot;source&quot;</span><span class="p">)))</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">source_directory</span> <span class="o">=</span> <span class="n">orm</span><span class="o">.</span><span class="n">Str</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">curdir</span><span class="p">,</span> <span class="s2">"source"</span><span class="p">)))</span>
 </pre></div>
 </div>
 </div>
@@ -440,11 +449,12 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span> <span class="o">=</span> <span class="n">WorkGraph</span><span class="p">(</span><span class="s2">&quot;wg-nfdi&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wg</span> <span class="o">=</span> <span class="n">WorkGraph</span><span class="p">(</span><span class="s2">"wg-nfdi"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>Each <code class="docutils literal notranslate"><span class="pre">wg.add_task</span></code> call below adds one stage of the pipeline: mesh generation, XDMF conversion, the Poisson solve, line-plot postprocessing, LaTeX macro substitution and paper compilation. Outputs are wired to the next task’s inputs with <code class="docutils literal notranslate"><span class="pre">.outputs.&lt;name&gt;</span></code>; since the underlying functions communicate through files on disk, these connections are really file paths handed from one task to the next, not shared Python objects.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">gmsh_output_file</span> <span class="o">=</span> <span class="n">wg</span><span class="o">.</span><span class="n">add_task</span><span class="p">(</span>
@@ -524,9 +534,10 @@
 <div class="cell_output docutils container">
 <script type="application/vnd.jupyter.widget-view+json">{"version_major": 2, "version_minor": 1, "model_id": "17520c019e5c413fb7a119ecc997c3ea"}</script></div>
 </div>
+<p>The <code class="docutils literal notranslate"><span class="pre">wg</span></code> widget above renders the assembled task graph. Once satisfied, <code class="docutils literal notranslate"><span class="pre">write_workflow_json</span></code> serializes it into the PWD <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> format — one <code class="docutils literal notranslate"><span class="pre">function</span></code> node per task, <code class="docutils literal notranslate"><span class="pre">input</span></code> nodes for <code class="docutils literal notranslate"><span class="pre">domain_size</span></code>/<code class="docutils literal notranslate"><span class="pre">source_directory</span></code>, and edges recording which task output feeds which task’s input port, as shown by the <code class="docutils literal notranslate"><span class="pre">cat</span></code> output below.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">&quot;aiida_nfdi.json&quot;</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workflow_json_filename</span> <span class="o">=</span> <span class="s2">"aiida_nfdi.json"</span>
 </pre></div>
 </div>
 </div>
@@ -546,158 +557,158 @@
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{
-  &quot;version&quot;: &quot;0.1.0&quot;,
-  &quot;nodes&quot;: [
+  "version": "0.1.0",
+  "nodes": [
     {
-      &quot;id&quot;: 0,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.generate_mesh&quot;
+      "id": 0,
+      "type": "function",
+      "value": "workflow.generate_mesh"
     },
     {
-      &quot;id&quot;: 1,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.convert_to_xdmf&quot;
+      "id": 1,
+      "type": "function",
+      "value": "workflow.convert_to_xdmf"
     },
     {
-      &quot;id&quot;: 2,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.poisson&quot;
+      "id": 2,
+      "type": "function",
+      "value": "workflow.poisson"
     },
     {
-      &quot;id&quot;: 3,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.plot_over_line&quot;
+      "id": 3,
+      "type": "function",
+      "value": "workflow.plot_over_line"
     },
     {
-      &quot;id&quot;: 4,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.substitute_macros&quot;
+      "id": 4,
+      "type": "function",
+      "value": "workflow.substitute_macros"
     },
     {
-      &quot;id&quot;: 5,
-      &quot;type&quot;: &quot;function&quot;,
-      &quot;value&quot;: &quot;workflow.compile_paper&quot;
+      "id": 5,
+      "type": "function",
+      "value": "workflow.compile_paper"
     },
     {
-      &quot;id&quot;: 6,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;domain_size&quot;,
-      &quot;value&quot;: 2.0
+      "id": 6,
+      "type": "input",
+      "name": "domain_size",
+      "value": 2.0
     },
     {
-      &quot;id&quot;: 7,
-      &quot;type&quot;: &quot;input&quot;,
-      &quot;name&quot;: &quot;source_directory&quot;,
-      &quot;value&quot;: &quot;/home/jovyan/example_workflows/nfdi/source&quot;
+      "id": 7,
+      "type": "input",
+      "name": "source_directory",
+      "value": "/home/jovyan/example_workflows/nfdi/source"
     },
     {
-      &quot;id&quot;: 8,
-      &quot;type&quot;: &quot;output&quot;,
-      &quot;name&quot;: &quot;result&quot;
+      "id": 8,
+      "type": "output",
+      "name": "result"
     }
   ],
-  &quot;edges&quot;: [
+  "edges": [
     {
-      &quot;target&quot;: 1,
-      &quot;targetPort&quot;: &quot;gmsh_output_file&quot;,
-      &quot;source&quot;: 0,
-      &quot;sourcePort&quot;: null
+      "target": 1,
+      "targetPort": "gmsh_output_file",
+      "source": 0,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 2,
-      &quot;targetPort&quot;: &quot;meshio_output_xdmf&quot;,
-      &quot;source&quot;: 1,
-      &quot;sourcePort&quot;: &quot;xdmf_file&quot;
+      "target": 2,
+      "targetPort": "meshio_output_xdmf",
+      "source": 1,
+      "sourcePort": "xdmf_file"
     },
     {
-      &quot;target&quot;: 2,
-      &quot;targetPort&quot;: &quot;meshio_output_h5&quot;,
-      &quot;source&quot;: 1,
-      &quot;sourcePort&quot;: &quot;h5_file&quot;
+      "target": 2,
+      "targetPort": "meshio_output_h5",
+      "source": 1,
+      "sourcePort": "h5_file"
     },
     {
-      &quot;target&quot;: 3,
-      &quot;targetPort&quot;: &quot;poisson_output_pvd_file&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;pvd_file&quot;
+      "target": 3,
+      "targetPort": "poisson_output_pvd_file",
+      "source": 2,
+      "sourcePort": "pvd_file"
     },
     {
-      &quot;target&quot;: 3,
-      &quot;targetPort&quot;: &quot;poisson_output_vtu_file&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;vtu_file&quot;
+      "target": 3,
+      "targetPort": "poisson_output_vtu_file",
+      "source": 2,
+      "sourcePort": "vtu_file"
     },
     {
-      &quot;target&quot;: 4,
-      &quot;targetPort&quot;: &quot;pvbatch_output_file&quot;,
-      &quot;source&quot;: 3,
-      &quot;sourcePort&quot;: null
+      "target": 4,
+      "targetPort": "pvbatch_output_file",
+      "source": 3,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 4,
-      &quot;targetPort&quot;: &quot;ndofs&quot;,
-      &quot;source&quot;: 2,
-      &quot;sourcePort&quot;: &quot;numdofs&quot;
+      "target": 4,
+      "targetPort": "ndofs",
+      "source": 2,
+      "sourcePort": "numdofs"
     },
     {
-      &quot;target&quot;: 5,
-      &quot;targetPort&quot;: &quot;macros_tex&quot;,
-      &quot;source&quot;: 4,
-      &quot;sourcePort&quot;: null
+      "target": 5,
+      "targetPort": "macros_tex",
+      "source": 4,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 5,
-      &quot;targetPort&quot;: &quot;plot_file&quot;,
-      &quot;source&quot;: 3,
-      &quot;sourcePort&quot;: null
+      "target": 5,
+      "targetPort": "plot_file",
+      "source": 3,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 0,
-      &quot;targetPort&quot;: &quot;domain_size&quot;,
-      &quot;source&quot;: 6,
-      &quot;sourcePort&quot;: null
+      "target": 0,
+      "targetPort": "domain_size",
+      "source": 6,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 0,
-      &quot;targetPort&quot;: &quot;source_directory&quot;,
-      &quot;source&quot;: 7,
-      &quot;sourcePort&quot;: null
+      "target": 0,
+      "targetPort": "source_directory",
+      "source": 7,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 2,
-      &quot;targetPort&quot;: &quot;source_directory&quot;,
-      &quot;source&quot;: 7,
-      &quot;sourcePort&quot;: null
+      "target": 2,
+      "targetPort": "source_directory",
+      "source": 7,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 3,
-      &quot;targetPort&quot;: &quot;source_directory&quot;,
-      &quot;source&quot;: 7,
-      &quot;sourcePort&quot;: null
+      "target": 3,
+      "targetPort": "source_directory",
+      "source": 7,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 4,
-      &quot;targetPort&quot;: &quot;domain_size&quot;,
-      &quot;source&quot;: 6,
-      &quot;sourcePort&quot;: null
+      "target": 4,
+      "targetPort": "domain_size",
+      "source": 6,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 4,
-      &quot;targetPort&quot;: &quot;source_directory&quot;,
-      &quot;source&quot;: 7,
-      &quot;sourcePort&quot;: null
+      "target": 4,
+      "targetPort": "source_directory",
+      "source": 7,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 5,
-      &quot;targetPort&quot;: &quot;source_directory&quot;,
-      &quot;source&quot;: 7,
-      &quot;sourcePort&quot;: null
+      "target": 5,
+      "targetPort": "source_directory",
+      "source": 7,
+      "sourcePort": null
     },
     {
-      &quot;target&quot;: 8,
-      &quot;targetPort&quot;: null,
-      &quot;source&quot;: 5,
-      &quot;sourcePort&quot;: null
+      "target": 8,
+      "targetPort": null,
+      "source": 5,
+      "sourcePort": null
     }
   ]
 }
@@ -708,6 +719,7 @@
 </section>
 <section id="load-workflow-with-jobflow">
 <h2>Load Workflow with jobflow<a class="headerlink" href="#load-workflow-with-jobflow" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">python_workflow_definition.jobflow.load_workflow_json</span></code> reconstructs the same six-stage pipeline as a jobflow <code class="docutils literal notranslate"><span class="pre">Flow</span></code>, purely from <code class="docutils literal notranslate"><span class="pre">aiida_nfdi.json</span></code> — no reference to the <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> objects defined above. <code class="docutils literal notranslate"><span class="pre">run_locally</span></code> then executes the jobs in dependency order, re-running <code class="docutils literal notranslate"><span class="pre">gmsh</span></code>, <code class="docutils literal notranslate"><span class="pre">meshio</span></code>, the Poisson solver, <code class="docutils literal notranslate"><span class="pre">pvbatch</span></code> and <code class="docutils literal notranslate"><span class="pre">tectonic</span></code> exactly as before.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.jobflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -753,12 +765,12 @@
 2025-05-24 05:42:14,699 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;1c3eab15-7639-4f4e-9ca7-7523ba640ca5&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.msh&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;07acbed1-2abb-4141-896d-170b58aba7c2&#39;: {1: Response(output={&#39;xdmf_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.xdmf&#39;, &#39;h5_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/preprocessing/square.h5&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;b212b743-f36d-4f7b-a64a-79060469f34b&#39;: {1: Response(output={&#39;numdofs&#39;: 357, &#39;pvd_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/processing/poisson.pvd&#39;, &#39;vtu_file&#39;: &#39;/home/jovyan/example_workflows/nfdi/processing/poisson000000.vtu&#39;}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;af5a3a54-b7fa-45f8-a70f-7f95d23c32c4&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/plotoverline.csv&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;ec55c04a-a5cb-4d8f-9981-961f7297532e&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/macros.tex&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))},
- &#39;629539b7-2541-4ba7-9546-b7adb0cc312e&#39;: {1: Response(output=&#39;/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf&#39;, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/nfdi&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'1c3eab15-7639-4f4e-9ca7-7523ba640ca5': {1: Response(output='/home/jovyan/example_workflows/nfdi/preprocessing/square.msh', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ '07acbed1-2abb-4141-896d-170b58aba7c2': {1: Response(output={'xdmf_file': '/home/jovyan/example_workflows/nfdi/preprocessing/square.xdmf', 'h5_file': '/home/jovyan/example_workflows/nfdi/preprocessing/square.h5'}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ 'b212b743-f36d-4f7b-a64a-79060469f34b': {1: Response(output={'numdofs': 357, 'pvd_file': '/home/jovyan/example_workflows/nfdi/processing/poisson.pvd', 'vtu_file': '/home/jovyan/example_workflows/nfdi/processing/poisson000000.vtu'}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ 'af5a3a54-b7fa-45f8-a70f-7f95d23c32c4': {1: Response(output='/home/jovyan/example_workflows/nfdi/postprocessing/plotoverline.csv', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ 'ec55c04a-a5cb-4d8f-9981-961f7297532e': {1: Response(output='/home/jovyan/example_workflows/nfdi/postprocessing/macros.tex', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))},
+ '629539b7-2541-4ba7-9546-b7adb0cc312e': {1: Response(output='/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf', detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/nfdi'))}}
 </pre></div>
 </div>
 </div>
@@ -766,6 +778,7 @@
 </section>
 <section id="load-workflow-with-pyiron-base">
 <h2>Load Workflow with pyiron_base<a class="headerlink" href="#load-workflow-with-pyiron-base" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">python_workflow_definition.pyiron_base.load_workflow_json</span></code> turns the JSON graph into a list of delayed pyiron jobs; <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> visualizes their dependencies and <code class="docutils literal notranslate"><span class="pre">.pull()</span></code> triggers execution, running each job in turn and returning the final <code class="docutils literal notranslate"><span class="pre">paper.pdf</span></code> path.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -799,7 +812,7 @@ The job substitute_macros_63766eafd6b1980c7832dd8c9a97c96e was saved and receive
 The job compile_paper_128d1d58374953c00e95b8de62cbb10b was saved and received the ID: 6
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>'/home/jovyan/example_workflows/nfdi/postprocessing/paper.pdf'
 </pre></div>
 </div>
 </div>
@@ -807,6 +820,7 @@ The job compile_paper_128d1d58374953c00e95b8de62cbb10b was saved and received th
 </section>
 <section id="load-workflow-with-pyiron-workflow">
 <h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<p>Finally, the same JSON is loaded into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> object. <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> shows the node graph and <code class="docutils literal notranslate"><span class="pre">.run()</span></code> executes it end to end, again shelling out to each external tool in turn.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -932,7 +946,7 @@ By Jan Janssen
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2026.
       <br/>
     
   </p>

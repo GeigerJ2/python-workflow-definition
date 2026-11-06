@@ -141,8 +141,14 @@
   
   
   
+    
+    
+      
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Python Workflow Definition - Home"/>
+    <img src="../../_static/logo.png" class="logo__image only-dark pst-js-only" alt="Python Workflow Definition - Home"/>
   
-    <p class="title logo__title">Python Workflow Definition</p>
   
 </a></div>
         <div class="sidebar-primary-item">
@@ -171,7 +177,7 @@
 </ul>
 </details></li>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../evcurve.html">Energy Volume Curve</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
-<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">Aiida</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/aiida.html">aiida-workgraph</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/jobflow.html">jobflow</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../quantum_espresso/pyiron_base.html">pyiron</a></li>
 </ul>
@@ -364,7 +370,7 @@
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executorlib">executorlib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobflow">Jobflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyiron">pyiron</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyiron-workflow">pyiron_workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 </ul>
             </nav>
@@ -379,8 +385,10 @@
                   
   <section class="tex2jax_ignore mathjax_ignore" id="load-simple-workflow">
 <h1>Load Simple Workflow<a class="headerlink" href="#load-simple-workflow" title="Link to this heading">#</a></h1>
+<p>This notebook loads a single, pre-existing <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> with several different engines in turn. Since the JSON only describes function nodes, inputs, outputs and the edges between them, it does not matter which engine originally wrote it — any of the engines below can load and execute it.</p>
 <section id="plot">
 <h2>Plot<a class="headerlink" href="#plot" title="Link to this heading">#</a></h2>
+<p>Before running the workflow with any engine, <code class="docutils literal notranslate"><span class="pre">python_workflow_definition.plot.plot</span></code> renders <code class="docutils literal notranslate"><span class="pre">workflow.json</span></code> directly as a graph of function, input and output nodes — independent of any particular workflow engine.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.plot</span><span class="w"> </span><span class="kn">import</span> <span class="n">plot</span>
@@ -390,7 +398,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s1">&#39;workflow.json&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plot</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s1">'workflow.json'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -401,6 +409,7 @@
 </section>
 <section id="aiida">
 <h2>Aiida<a class="headerlink" href="#aiida" title="Link to this heading">#</a></h2>
+<p>Loading the JSON into <code class="docutils literal notranslate"><span class="pre">aiida-workgraph</span></code> requires connecting to an AiiDA profile first via <code class="docutils literal notranslate"><span class="pre">load_profile()</span></code>; the workflow is then reconstructed as a <code class="docutils literal notranslate"><span class="pre">WorkGraph</span></code> and executed with <code class="docutils literal notranslate"><span class="pre">.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.aiida</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -411,14 +420,14 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid=&#39;3ce302a995914d2e8a7b6327a10fe381&#39; name=&#39;pwd&#39;&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Profile&lt;uuid='3ce302a995914d2e8a7b6327a10fe381' name='pwd'&gt;
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workgraph</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s1">&#39;workflow.json&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">workgraph</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s1">'workflow.json'</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -455,6 +464,7 @@
 </section>
 <section id="executorlib">
 <h2>executorlib<a class="headerlink" href="#executorlib" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">python_workflow_definition.executorlib.load_workflow_json</span></code> submits each function node to the given <code class="docutils literal notranslate"><span class="pre">Executor</span></code> and returns the <code class="docutils literal notranslate"><span class="pre">Future</span></code> of the final node; calling <code class="docutils literal notranslate"><span class="pre">.result()</span></code> blocks until the whole chain has completed.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">executorlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">SingleNodeExecutor</span>
@@ -472,7 +482,7 @@
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">SingleNodeExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span> <span class="k">as</span> <span class="n">exe</span><span class="p">:</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">,</span> <span class="n">exe</span><span class="o">=</span><span class="n">exe</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">"workflow.json"</span><span class="p">,</span> <span class="n">exe</span><span class="o">=</span><span class="n">exe</span><span class="p">)</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -492,6 +502,7 @@
 </section>
 <section id="jobflow">
 <h2>Jobflow<a class="headerlink" href="#jobflow" title="Link to this heading">#</a></h2>
+<p>The JSON is reconstructed as a jobflow <code class="docutils literal notranslate"><span class="pre">Flow</span></code> and executed locally with <code class="docutils literal notranslate"><span class="pre">run_locally</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">jobflow.managers.local</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_locally</span>
@@ -508,7 +519,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flow</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">"workflow.json"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -531,9 +542,9 @@
 2025-05-24 05:39:49,516 INFO Finished executing jobs locally
 </pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;f82f13df-44cc-4bce-8712-ab5a1408c551&#39;: {1: Response(output={&#39;prod&#39;: 2, &#39;div&#39;: 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))},
- &#39;bb1c3b6d-986a-4e5d-b2f4-6611940ba4c6&#39;: {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))},
- &#39;5c60ac07-39fd-4511-93d8-3bd65c6bd7ca&#39;: {1: Response(output=6.25, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath(&#39;/home/jovyan/example_workflows/arithmetic&#39;))}}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{'f82f13df-44cc-4bce-8712-ab5a1408c551': {1: Response(output={'prod': 2, 'div': 0.5}, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/arithmetic'))},
+ 'bb1c3b6d-986a-4e5d-b2f4-6611940ba4c6': {1: Response(output=2.5, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/arithmetic'))},
+ '5c60ac07-39fd-4511-93d8-3bd65c6bd7ca': {1: Response(output=6.25, detour=None, addition=None, replace=None, stored_data=None, stop_children=False, stop_jobflow=False, job_dir=PosixPath('/home/jovyan/example_workflows/arithmetic'))}}
 </pre></div>
 </div>
 </div>
@@ -541,6 +552,7 @@
 </section>
 <section id="pyiron">
 <h2>pyiron<a class="headerlink" href="#pyiron" title="Link to this heading">#</a></h2>
+<p>Loading the JSON into <code class="docutils literal notranslate"><span class="pre">pyiron_base</span></code> produces a list of delayed jobs; <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> visualizes the dependency graph and <code class="docutils literal notranslate"><span class="pre">.pull()</span></code> triggers execution of the whole chain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_base</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -550,7 +562,7 @@
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">delayed_object_lst</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">"workflow.json"</span><span class="p">)</span>
 <span class="n">delayed_object_lst</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -577,8 +589,9 @@ The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the I
 </div>
 </div>
 </section>
-<section id="load-workflow-with-pyiron-workflow">
-<h2>Load Workflow with pyiron_workflow<a class="headerlink" href="#load-workflow-with-pyiron-workflow" title="Link to this heading">#</a></h2>
+<section id="pyiron-workflow">
+<h2>pyiron_workflow<a class="headerlink" href="#pyiron-workflow" title="Link to this heading">#</a></h2>
+<p>Finally, the workflow is loaded into a <code class="docutils literal notranslate"><span class="pre">pyiron_workflow</span></code> <code class="docutils literal notranslate"><span class="pre">Workflow</span></code> object, drawn with <code class="docutils literal notranslate"><span class="pre">.draw()</span></code> and executed with <code class="docutils literal notranslate"><span class="pre">.run()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.pyiron_workflow</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -588,7 +601,7 @@ The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the I
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wf</span> <span class="o">=</span> <span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">"workflow.json"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -610,6 +623,7 @@ The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the I
 </section>
 <section id="python">
 <h2>Python<a class="headerlink" href="#python" title="Link to this heading">#</a></h2>
+<p>As a baseline, <code class="docutils literal notranslate"><span class="pre">python_workflow_definition.purepython.load_workflow_json</span></code> interprets the JSON directly in plain Python, with no workflow engine involved: it evaluates each function node in dependency order and returns the final result.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">python_workflow_definition.purepython</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_workflow_json</span>
@@ -619,7 +633,7 @@ The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the I
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">&quot;workflow.json&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">load_workflow_json</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s2">"workflow.json"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -685,7 +699,7 @@ The job get_square_9cc2f0545498916d7720c59c1120a66d was saved and received the I
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#executorlib">executorlib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#jobflow">Jobflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyiron">pyiron</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#load-workflow-with-pyiron-workflow">Load Workflow with pyiron_workflow</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#pyiron-workflow">pyiron_workflow</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python">Python</a></li>
 </ul>
   </nav></div>
@@ -711,7 +725,7 @@ By Jan Janssen
 
   <p class="copyright">
     
-      © Copyright 2023.
+      © Copyright 2026.
       <br/>
     
   </p>
