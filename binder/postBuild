@@ -6,3 +6,4 @@ pip install -e example_workflows/quantum_espresso/qe_xml_parser
 pip install -e python_workflow_definition
 verdi presto --profile-name pwd
 mv example_workflows/quantum_espresso/espresso ~
+jupytext --to notebook example_workflows/*/*.py

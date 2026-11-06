@@ -70,7 +70,7 @@ jobs:
       shell: bash -l {0}
       run: |
         pip install --no-deps --no-build-isolation -e .
-        conda install -c conda-forge jupyter papermill
+        conda install -c conda-forge jupyter papermill jupytext
         verdi presto --profile-name pwd
         sudo apt-get install -y $(cat binder/apt.txt)
     - name: Create Additional Conda Environments
@@ -82,6 +82,7 @@ jobs:
     - name: Tests
       shell: bash -l {0}
       run: |
+        jupytext --to notebook example_workflows/nfdi/*.py
         cd example_workflows/nfdi/
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
@@ -111,13 +112,14 @@ jobs:
       run: |
         pip install --no-deps --no-build-isolation -e example_workflows/quantum_espresso/qe_xml_parser
         pip install --no-deps --no-build-isolation -e .
-        conda install -c conda-forge jupyter papermill
+        conda install -c conda-forge jupyter papermill jupytext
         verdi presto --profile-name pwd
     - name: Tests
       shell: bash -l {0}
       run: |
         export ESPRESSO_PSEUDO=$(pwd)/espresso/pseudo
         cp -r example_workflows/quantum_espresso/espresso .
+        jupytext --to notebook example_workflows/quantum_espresso/*.py
         cd example_workflows/quantum_espresso
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
@@ -143,11 +145,12 @@ jobs:
       shell: bash -l {0}
       run: |
         pip install --no-deps --no-build-isolation -e .
-        conda install -c conda-forge jupyter papermill
+        conda install -c conda-forge jupyter papermill jupytext
         verdi presto --profile-name pwd
     - name: Tests
       shell: bash -l {0}
       run: |
+        jupytext --to notebook example_workflows/arithmetic/*.py
         cd example_workflows/arithmetic
         papermill aiida.ipynb aiida_out.ipynb -k "python3"
         papermill cwl.ipynb cwl_out.ipynb -k "python3"
@@ -172,6 +175,8 @@ jobs:
     - name: Install Jupyterbook
       shell: bash -l {0}
       run: |
+        pip install jupytext
+        jupytext --to notebook example_workflows/*/*.py
         cp documentation/_config.yml .
         cp documentation/_toc.yml .
         cp documentation/*.md .
