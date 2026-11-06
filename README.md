@@ -43,7 +43,7 @@ def combined_workflow(x=1, y=2):
     tmp_dict = get_prod_and_div(x=x, y=y)
     return get_sum(x=tmp_dict["prod"], y=tmp_dict["div"])
 ```
-For the workflow representation of these Python functions the Python functions are stored in the [example_workflows/arithmetic/workflow.py](example_workflows/arithmetic/workflow.py)
+For the workflow representation of these Python functions the Python functions are stored in the [example_workflows/arithmetic/workflow.py]([example_workflows/arithmetic/workflow.py](example_workflows/arithmetic/workflow.py))
 Python module. The connection of the Python functions are stored in the [example_workflows/arithmetic/workflow.json](example_workflows/arithmetic/workflow.json) 
 JSON file:
 ```JSON
@@ -77,29 +77,29 @@ The corresponding Python files demonstrate this functionality (each file is a Ju
 
 | Example                                                                                                        | Explanation                                                                                                               | 
 |----------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [example_workflows/arithmetic/aiida.py](example_workflows/arithmetic/aiida.py)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
-| [example_workflows/arithmetic/jobflow.py](example_workflows/arithmetic/jobflow.py)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
-| [example_workflows/arithmetic/pyiron_base.py](example_workflows/arithmetic/pyiron_base.py)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
-| [example_workflows/arithmetic/universal_workflow.py](example_workflows/arithmetic/universal_workflow.py) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
+| [example_workflows/arithmetic/aiida.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/arithmetic/aiida.html)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
+| [example_workflows/arithmetic/jobflow.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/arithmetic/jobflow.html)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
+| [example_workflows/arithmetic/pyiron_base.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/arithmetic/pyiron_base.html)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
+| [example_workflows/arithmetic/universal_workflow.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/arithmetic/universal_workflow.html) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
 
 ### Quantum Espresso Workflow
 The second workflow example is the calculation of an energy volume curve with Quantum Espresso. In the first step the 
 initial structure is relaxed, afterward it is strained and the total energy is calculated. 
-* [example_workflows/quantum_espresso/workflow.py](example_workflows/quantum_espresso/workflow.py) Python functions 
+* [example_workflows/quantum_espresso/workflow.py]([example_workflows/quantum_espresso/workflow.py](example_workflows/quantum_espresso/workflow.py)) Python functions 
 * [example_workflows/quantum_espresso/workflow.json](example_workflows/quantum_espresso/workflow.json) Workflow definition in the Python Workflow Definition.
 * [example_workflows/quantum_espresso/environment.yml](example_workflows/quantum_espresso/environment.yml) Conda environment
 
 | Example                                                                                                                    | Explanation                                                                                                               | 
 |----------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [example_workflows/quantum_espresso/aiida.py](example_workflows/quantum_espresso/aiida.py)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
-| [example_workflows/quantum_espresso/jobflow.py](example_workflows/quantum_espresso/jobflow.py)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
-| [example_workflows/quantum_espresso/pyiron_base.py](example_workflows/quantum_espresso/pyiron_base.py)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
-| [example_workflows/quantum_espresso/universal_workflow.py](example_workflows/quantum_espresso/universal_workflow.py) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
+| [example_workflows/quantum_espresso/aiida.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/quantum_espresso/aiida.html)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
+| [example_workflows/quantum_espresso/jobflow.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/quantum_espresso/jobflow.html)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
+| [example_workflows/quantum_espresso/pyiron_base.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/quantum_espresso/pyiron_base.html)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
+| [example_workflows/quantum_espresso/universal_workflow.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/quantum_espresso/universal_workflow.html) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
 
 ### NFDI4Ing Scientific Workflow Requirements
 To demonstrate the compatibility of the Python Workflow Definition to file based workflows, the workflow benchmark developed as part of [NFDI4Ing](https://github.com/BAMresearch/NFDI4IngScientificWorkflowRequirements)
 is implemented for all three simulation codes based on a shared workflow definition. 
-* [example_workflows/nfdi/workflow.py](example_workflows/nfdi/workflow.py) Python functions 
+* [example_workflows/nfdi/workflow.py]([example_workflows/nfdi/workflow.py](example_workflows/nfdi/workflow.py)) Python functions 
 * [example_workflows/nfdi/workflow.json](example_workflows/nfdi/workflow.json) Workflow definition in the Python Workflow Definition.
 
 Additional source files provided with the workflow benchmark:
@@ -115,7 +115,7 @@ Additional source files provided with the workflow benchmark:
 
 | Example                                                                                            | Explanation                                                                                                               | 
 |----------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------|
-| [example_workflows/nfdi/aiida.py](example_workflows/nfdi/aiida.py)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
-| [example_workflows/nfdi/jobflow.py](example_workflows/nfdi/jobflow.py)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
-| [example_workflows/nfdi/pyiron_base.py](example_workflows/nfdi/pyiron_base.py)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
-| [example_workflows/nfdi/universal_workflow.py](example_workflows/nfdi/universal_workflow.py) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
+| [example_workflows/nfdi/aiida.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/nfdi/aiida.html)                           | Define Workflow with aiida and execute it with jobflow and pyiron_base.                                                   |
+| [example_workflows/nfdi/jobflow.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/nfdi/jobflow.html)                       | Define Workflow with jobflow and execute it with aiida and pyiron_base.                                                   |
+| [example_workflows/nfdi/pyiron_base.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/nfdi/pyiron_base.html)               | Define Workflow with pyiron_base and execute it with aiida and jobflow.                                                   |
+| [example_workflows/nfdi/universal_workflow.py](https://pythonworkflow.github.io/python-workflow-definition/example_workflows/nfdi/universal_workflow.html) | Execute workflow defined in the Python Workflow Definition with aiida, executorlib, jobflow, pyiron_base and pure Python. |
